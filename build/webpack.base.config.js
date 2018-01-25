@@ -1,0 +1,51 @@
+/**
+ * @file webpack编译配置基础脚本
+ * @Author wangjie19
+ * @Date 2018-01-24 14:38:44
+ * @Last Modified by: wangjie19
+ * @Last Modified time: 2018-01-24 15:20:51
+ */
+
+import webpack from 'webpack';
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+function resolvePath(file) {
+    return path.resolve(__dirname, file);
+}
+
+export default {
+    entry: {
+        main: resolvePath('../client/index.js')
+    },
+    output: {
+        path: resolvePath('../dist'),
+        filename: '[name].js',
+        publicPath: '/'
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.san$/,
+                loader: 'san-loader'
+            }
+        ]
+    },
+    resolve: {
+        alias: {
+            san: process.env.NODE_ENV === 'production'
+                ? 'san/dist/san.js'
+                : 'san/dist/san.dev.js'
+        }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename: 'vector.js'
+        }),
+        new HtmlWebpackPlugin({
+            title: '首页',
+            template: resolvePath('../client/pages/home.html')
+        })
+    ]
+};
