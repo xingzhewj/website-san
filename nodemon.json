@@ -12,7 +12,8 @@
     },
     "watch": [
         "client",
-        "server"
+        "server",
+        "build"
     ],
     "ext": "js san json"
 }
