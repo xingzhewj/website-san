@@ -5,7 +5,7 @@
     export default {
         initData() {
             return {
-                msg: 'wor4545656ld34324'
+                msg: 'wor4545656ld6756734324'
             };
         }
     }

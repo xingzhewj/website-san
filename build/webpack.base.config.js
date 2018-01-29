@@ -2,12 +2,13 @@
  * @file webpack编译配置基础脚本
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
- * @Last Modified by: wangjie19
- * @Last Modified time: 2018-01-26 16:15:16
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-01-29 22:51:58
  */
 
 import webpack from 'webpack';
 import path from 'path';
+import entries from './getEntries';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 function resolvePath(file) {

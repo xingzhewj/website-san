@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-24 15:22:58
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-01-29 21:45:05
+ * @Last Modified time: 2018-01-29 22:30:17
  */
 
 import path from 'path';
@@ -12,6 +12,7 @@ import webpack from 'webpack';
 import hotMiddleware from 'webpack-hot-middleware';
 import devMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../build/webpack.dev.config';
+import log4js from 'log4js';
 import opn from 'opn';
 
 const compiler = webpack(webpackConfig);
