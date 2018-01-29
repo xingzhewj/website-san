@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-24 15:22:58
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-01-25 18:41:00
+ * @Last Modified time: 2018-01-29 17:58:47
  */
 
 import path from 'path';
@@ -15,18 +15,18 @@ import webpackConfig from '../build/webpack.dev.config';
 
 const compiler = webpack(webpackConfig, () => {});
 const app = express();
-
-// devMiddleware(compiler, {
-//     publicPath: webpackConfig.output.publicPath,
-//     quiet: true
-// });
-// hotMiddleware(compiler, {
-//     noInfo: true,
-//     publicPath: webpackConfig.output.publicPath
-// });
-
-// app.use(devMiddleware);
-// app.use(hotMiddleware);
+// 对更改的文件进行监控，编译
+devMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
+});
+app.use(devMiddleware);
+// 页面的热重载
+hotMiddleware(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+});
+app.use(hotMiddleware);
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
 

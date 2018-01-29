@@ -6,7 +6,7 @@
   },
   "description": "base on san",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon ./index.js"
+    "dev": "cross-env NODE_ENV=development node ./index.js"
   },
   "devDependencies": {
     "babel": "^6.23.0",
