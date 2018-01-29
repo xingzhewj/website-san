@@ -1,0 +1,23 @@
+<template>
+    <div class="main">
+        <p>hello:{{ name }}</p>
+        <mytest/>
+    </div>
+</template>
+
+<script>
+import Test from './components/Test';
+export default {
+    components: {
+        'mytest': Test
+    },
+    initData() {
+        return {
+            name: 'walker'
+        }
+    }
+}
+</script>
+
+<style>
+</style>

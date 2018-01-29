@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-01-24 15:20:51
+ * @Last Modified time: 2018-01-26 16:15:16
  */
 
 import webpack from 'webpack';
@@ -16,7 +16,7 @@ function resolvePath(file) {
 
 export default {
     entry: {
-        main: resolvePath('../client/index.js')
+        main: resolvePath('../client/main.js')
     },
     output: {
         path: resolvePath('../dist'),
@@ -36,7 +36,8 @@ export default {
             san: process.env.NODE_ENV === 'production'
                 ? 'san/dist/san.js'
                 : 'san/dist/san.dev.js'
-        }
+        },
+        extensions: ['.js', '.json', '.san', '.less', '.css']
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
