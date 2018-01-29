@@ -5,7 +5,7 @@
     export default {
         initData() {
             return {
-                msg: 'world'
+                msg: 'wor4545656ld34324'
             };
         }
     }

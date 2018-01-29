@@ -2,8 +2,8 @@
  * @file 开发环境webpack配置
  * @Author wangjie19
  * @Date 2018-01-25 18:14:12
- * @Last Modified by: wangjie19
- * @Last Modified time: 2018-01-29 12:26:27
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-01-29 21:44:22
  */
 
 import webpack from 'webpack';
@@ -18,7 +18,8 @@ export default webpackMerge(
         },
         devtool: "cheap-module-source-map",
         plugins: [
-            new webpack.HotModuleReplacementPlugin()
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NoEmitOnErrorsPlugin()
         ]
     }
 );
