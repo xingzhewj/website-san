@@ -6,7 +6,8 @@
   },
   "description": "base on san",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node ./index.js"
+    "dev": "cross-env NODE_ENV=development nodemon ./index.js",
+    "prod": "cross-env NODE_ENV=production node ./index.js"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -25,6 +26,7 @@
     "opn": "^5.2.0",
     "san-loader": "^0.0.6",
     "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.4",
     "webpack-hot-middleware": "^2.21.0",

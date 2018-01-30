@@ -4,14 +4,14 @@
         ".git",
         ".svn",
         "node_modules/**/node_modules",
-        "dist"
+        "dist",
+        "client"
     ],
     "verbose": false,
     "execMap": {
         "js": "node --harmony"
     },
     "watch": [
-        "client",
         "server",
         "build"
     ],

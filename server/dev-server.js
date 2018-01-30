@@ -1,9 +1,9 @@
 /**
- * @file 服务器启动脚本
+ * @file 开发环境服务器启动脚本
  * @Author wangjie19
  * @Date 2018-01-24 15:22:58
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-01-29 22:30:17
+ * @Last Modified by: wangjie19
+ * @Last Modified time: 2018-01-30 18:00:50
  */
 
 import path from 'path';
@@ -32,10 +32,5 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.listen(8080, () => {
     console.log('server success:http://localhost:8080/');
-    opn(
-        'http://localhost:8080/',
-        {
-            app: ['chrome']
-        }
-    )
+    opn('http://localhost:8080/');
 });

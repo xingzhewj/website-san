@@ -2,8 +2,8 @@
  * @file webpack编译配置基础脚本
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-01-29 22:51:58
+ * @Last Modified by: wangjie19
+ * @Last Modified time: 2018-01-30 17:57:04
  */
 
 import webpack from 'webpack';
@@ -15,12 +15,17 @@ function resolvePath(file) {
     return path.resolve(__dirname, file);
 }
 
+console.log('xxxxx:', [
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'common',
+        filename: 'vector.js'
+    })
+].join(entries.plugins))
+
 export default {
-    entry: {
-        main: resolvePath('../client/main.js')
-    },
+    entry: entries.entries,
     output: {
-        path: resolvePath('../dist'),
+        path: resolvePath('../dist/js'),
         filename: '[name].js',
         publicPath: '/'
     },
@@ -44,10 +49,6 @@ export default {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'vector.js'
-        }),
-        new HtmlWebpackPlugin({
-            title: '首页',
-            template: resolvePath('../client/pages/home.html')
         })
-    ]
+    ].join(entries.plugins)
 };
