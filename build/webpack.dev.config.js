@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-25 18:14:12
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-01 14:29:35
+ * @Last Modified time: 2018-02-01 15:17:36
  */
 
 import webpack from 'webpack';
@@ -13,7 +13,7 @@ import entries from './entries';
 import hwplugins from './hwplugins';
 
 entries.reload = 'webpack-hot-middleware/client?reload=true';
-
+console.log(entries);
 export default webpackMerge(
     baseConfig,
     {

@@ -10,7 +10,7 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}/index.js",
             "env": {
-                "NODE_ENV": "production"
+                "NODE_ENV": "development"
             }
         }
     ]

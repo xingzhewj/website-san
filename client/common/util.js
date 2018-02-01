@@ -1,5 +1,3 @@
-alert('util-walker');
-
 function fileSort(params) {
     let fileds = Object.keys(params);
     fileds.sort();
