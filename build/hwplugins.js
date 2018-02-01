@@ -2,23 +2,25 @@ import path from 'path';
 import fs from 'fs';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const dirs = fs.readdirSync(path.resolve(__dirname, '../client/pages'));
+const dirs = fs.readdirSync(path.resolve(__dirname, '../server/pages'));
 
 let hwpPlugins = []
 
-dirs.forEach((dir, index) => {
-    const dirPath = path.resolve(__dirname, '../client/pages', dir);
-    const statInfo = fs.statSync(dirPath);
-    if (statInfo.isDirectory()) {
-        hwpPlugins.push(
-            new HtmlWebpackPlugin({
-                template: path.resolve(dirPath, './index.html'),
-                filename: path.resolve(__dirname, `../dist/pages/${dir}.html`),
-                inject: true,
-                favicon: path.resolve(__dirname, '../favicon.ico')
-            })
-        );
-    }
+dirs.forEach((file, index) => {
+    const filename = file.split('.')[0];
+    hwpPlugins.push(
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../server/pages', file),
+            filename: path.resolve(__dirname, `../server/templates/${filename}.html`),
+            minify: {
+                removeComments: true,
+                collapseWhitespace: false
+            },
+            inject: true,
+            favicon: path.resolve(__dirname, '../favicon.ico'),
+            chunks:['vector', 'util', filename]
+        })
+    );
 });
 
 export default hwpPlugins;

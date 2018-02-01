@@ -2,8 +2,8 @@
  * @file webpack编译配置基础脚本
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-01-30 22:57:28
+ * @Last Modified by: wangjie19
+ * @Last Modified time: 2018-02-01 11:12:50
  */
 
 import webpack from 'webpack';
@@ -27,6 +27,11 @@ export default {
             {
                 test: /\.san$/,
                 loader: 'san-loader'
+            },
+            {
+                test: /\.html?$/,
+                exclude: /node_modules/,
+                use: ['html-loader']
             }
         ]
     },
@@ -40,7 +45,7 @@ export default {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
+            name: 'vector',
             filename: 'vector.js'
         })
     ]
