@@ -3,15 +3,13 @@
  * @Author wangjie19
  * @Date 2018-02-01 17:46:38
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-01 18:04:47
+ * @Last Modified time: 2018-02-01 18:08:23
  */
 
 import axios from 'axios';
 
 function get(url, options) {
-    axios.get(url, options).then(data => {
-        
-    });
+    return axios.get(url, options);
 }
 
 export default {

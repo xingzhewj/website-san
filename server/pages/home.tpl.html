@@ -7,7 +7,17 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
-    <div class="main" id="main"></div>
+    <div class="main" id="main">
+    </div>
+    <p>q3433q4f3w4g3</p>
+    <div>
+        <% for (var i =0; i < casts.length; i++) { %>
+            <div>
+                <p><%- casts[i].name %></p>
+                <img src="<%- casts[i].avatars.small %>"/>
+            </div>
+        <% } %>
+    </div>
     <%- include('../partials/footer.ejs') %>
 </body>
 </html>
