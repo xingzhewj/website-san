@@ -10,11 +10,12 @@
     <div class="main" id="main">
     </div>
     <p>q3433q4f3w4g3</p>
-    <div>
-        <% for (var i =0; i < casts.length; i++) { %>
+    <div class="list-container">
+        <% for (var i =0; i < list.length; i++) { %>
             <div>
-                <p><%- casts[i].name %></p>
-                <img src="<%- casts[i].avatars.small %>"/>
+                <p><%- list[i].name %></p>
+                <p><%- list[i].text %></p>
+                <img src="<%- list[i].profile_image %>"/>
             </div>
         <% } %>
     </div>

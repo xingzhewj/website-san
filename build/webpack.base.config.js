@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-01 11:12:50
+ * @Last Modified time: 2018-02-02 16:16:17
  */
 
 import webpack from 'webpack';
@@ -32,6 +32,19 @@ export default {
                 test: /\.html?$/,
                 exclude: /node_modules/,
                 use: ['html-loader']
+            },
+            {
+                test: /\.less$/,
+                use: [
+                  'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                  'less-loader'
+                ]
             }
         ]
     },

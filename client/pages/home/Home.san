@@ -3,6 +3,7 @@
         <p>hello:{{ name }}</p>
         <mytest/>
         <router-link to="/test1">test-link</router-link>
+        <router-link to="/test2/123">test-link2</router-link>
         <div id="home_view"></div>
     </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import { Link } from 'san-router';
 import Test from '../../components/Test';
+import http from '../../common/http';
 export default {
     components: {
         'router-link': Link,
@@ -19,6 +21,15 @@ export default {
         return {
             name: 'walker113333155555'
         }
+    },
+    attached() {
+        http.get('/weatherApi', {
+            city: '西安'
+        }).then(data => {
+            console.log('data:', data);
+        }, err => {
+            console.log('error:', err);
+        });
     }
 }
 </script>

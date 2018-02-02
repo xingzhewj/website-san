@@ -2,6 +2,7 @@ import Home from './Home';
 import {router, Link} from 'san-router';
 import Test1 from './HomeTest1';
 import Test2 from './HomeTest2';
+import './css/home';
 
 new Home().attach(document.getElementById('main'));
 

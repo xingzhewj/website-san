@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-24 15:22:58
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-02 12:02:26
+ * @Last Modified time: 2018-02-02 17:36:37
  */
 
 import path from 'path';
@@ -17,9 +17,11 @@ import opn from 'opn';
 import hotMiddleware from 'webpack-hot-middleware';
 import devMiddleware from 'webpack-dev-middleware';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import session from 'express-session';
 
 import router from './router';
+import apis from './api';
 
 const compiler = webpack(webpackConfig);
 const app = express();
@@ -40,18 +42,23 @@ app.use(hotMiddleware(compiler, {
 }));
 // 设置静态资源
 app.use(express.static(path.resolve(__dirname, '../dist')));
-// 设置页面路由
-app.use(router);
 // 设置cookie中间件
 app.use(cookieParser());
+// 解析post参数(这个需要写在路由配置之前，因为是中间件嘛顺序执行的嘛；嘿嘿！！！)
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// 设置页面路由
+app.use(router);
+// 设置接口路由
+app.use('/api', apis);
 // 设置session
 app.use(session(
     {secret: 'walker-key'}
 ));
 
-app.listen(8080, () => {
+app.listen(8080, '0.0.0.0', () => {
     console.log('server success:http://localhost:8080/');
-    opn('http://localhost:8080/', {
+    opn('http://127.0.0.1:8080/', {
         app: 'google chrome'
     });
 });
