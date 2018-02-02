@@ -1,0 +1,18 @@
+<template>
+    <div class="user-container">
+        <p>用户-{{ userName }}</p>
+    </div>
+</template>
+
+<script>
+    export default {
+        initData() {
+            return {
+                userName: 'walker'
+            };
+        }
+    }
+</script>
+
+<style>
+</style>

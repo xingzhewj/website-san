@@ -2,13 +2,17 @@
     <div class="main">
         <p>hello:{{ name }}</p>
         <mytest/>
+        <router-link to="/test1">test-link</router-link>
+        <div id="home_view"></div>
     </div>
 </template>
 
 <script>
+import { Link } from 'san-router';
 import Test from '../../components/Test';
 export default {
     components: {
+        'router-link': Link,
         'mytest': Test
     },
     initData() {

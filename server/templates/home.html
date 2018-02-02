@@ -6,8 +6,18 @@
     <title>home</title>
 <link rel="shortcut icon" href="/favicon.ico"></head>
 <body>
-    <%- include('../partials/header.ejs') %>
-    <div class="main" id="main"></div>
-    <%- include('../partials/footer.ejs') %>
-<script type="text/javascript" src="/vector.js"></script><script type="text/javascript" src="/home.js"></script><script type="text/javascript" src="/util.js"></script></body>
+    <%- include('../partials/header.html') %>
+    <div class="main" id="main">
+    </div>
+    <p>q3433q4f3w4g3</p>
+    <div>
+        <% for (var i =0; i < casts.length; i++) { %>
+            <div>
+                <p><%- casts[i].name %></p>
+                <img src="<%- casts[i].avatars.small %>">
+            </div>
+        <% } %>
+    </div>
+    <%- include('../partials/footer.html') %>
+<script type="text/javascript" src="/vector.js"></script><script type="text/javascript" src="/home.js"></script></body>
 </html>

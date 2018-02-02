@@ -1,0 +1,21 @@
+<template>
+    <div class="home-test2">
+        <p>{{ test2 }}</p>
+        <p>id: {{ id }}</p>
+    </div>
+</template>
+
+<script>
+    export default {
+        initData() {
+            return {
+                id: '0',
+                test2: 'test2数据'
+            };
+        },
+        created() {
+            const id = this.data.get('route.query.id');
+            this.data.set('id', id);
+        }
+    }
+</script>

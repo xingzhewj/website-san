@@ -1,0 +1,15 @@
+<template>
+    <div class="home-test1">
+        <p>home-test1：{{ test }}</p>
+    </div>
+</template>
+
+<script>
+    export default {
+        initData() {
+            return {
+                test: '这是测试数据'
+            };
+        }
+    }
+</script>

@@ -2,7 +2,7 @@
  * @Author:walker
  * @Date: 2018-01-30 22:04:05 
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-01 18:21:08
+ * @Last Modified time: 2018-02-02 12:13:53
  */
 
 import express from 'express';
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
     const data = await request.get(
         'http://api.douban.com/v2/movie/top250',
         {
-            start: 25,
+            start: 0,
             count: 25
         }
     );
