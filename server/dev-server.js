@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-24 15:22:58
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-02 17:36:37
+ * @Last Modified time: 2018-02-02 18:27:05
  */
 
 import path from 'path';
@@ -26,6 +26,8 @@ import apis from './api';
 const compiler = webpack(webpackConfig);
 const app = express();
 
+import logConfig from './config/log';
+log4js.configure(logConfig);
 // 设置ejs模版
 app.set('views', path.resolve(__dirname, './templates'));
 app.engine('.html', ejs.__express);
