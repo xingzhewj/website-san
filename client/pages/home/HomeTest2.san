@@ -10,7 +10,7 @@
         initData() {
             return {
                 id: '0',
-                test2: 'test2数据'
+                test2: 'test2数ffff据'
             };
         },
         created() {

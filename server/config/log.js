@@ -2,11 +2,13 @@ export default {
     "appenders": {
         "access": {
             "type": "dateFile",
-            "filename": "log/access.log",
-            "pattern": "-yyyy-MM-dd"
+            "filename": "log/access-",
+            "pattern": "yyyy-MM-dd.log",
+            "alwaysIncludePattern": true
         },
         "rule-console": {
-            "type": "console"
+            "type": "console",
+            replaceConsole: true
         },
         "rule-file": {
             "type": "dateFile",
@@ -38,9 +40,16 @@ export default {
         },
         "http": {
             "appenders": [
-                "access"
+                'access',
+                'rule-console'
             ],
-            "level": "info"
+            "level": "all"
+        },
+        error: {
+            appenders: [
+                'rule-error'
+            ],
+            level: 'error'
         }
     }
 };
