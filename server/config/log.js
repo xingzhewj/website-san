@@ -40,8 +40,7 @@ export default {
         },
         "http": {
             "appenders": [
-                'access',
-                'rule-console'
+                'access'
             ],
             "level": "all"
         },

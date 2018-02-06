@@ -17,9 +17,7 @@ dirs.forEach((file, index) => {
         },
         inject: true,
         favicon: path.resolve(__dirname, '../favicon.ico'),
-        chunks: process.env.NODE_ENV === 'development'
-            ? ['vector', filename, 'util', 'reload']
-            : ['vector', filename, 'util']
+        chunks: ['vector', 'util', filename]
     };
     hwpPlugins.push(
         new HtmlWebpackPlugin(hwpConf)

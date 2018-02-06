@@ -3,27 +3,32 @@
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-05 18:36:35
+ * @Last Modified time: 2018-02-06 17:54:53
  */
-
 import webpack from 'webpack';
 import path from 'path';
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 function resolvePath(file) {
     return path.resolve(__dirname, file);
 }
 
+const extractCss = new ExtractTextPlugin({
+    filename: '../css/[name].css'
+});
+const extractLess = new ExtractTextPlugin({
+    filename: '../css/[name].css'
+});
+
 export default {
     entry: {
-        reload: 'webpack-hot-middleware/client?reload=true',
         util: resolvePath('../client/common/util.js')
     },
     output: {
         path: resolvePath('../dist/js'),
-        filename: '[name]-[hash:4].js',
-        chunkFilename: '[chunkhash:8].[name].chunk.js',
-        publicPath: '/js'
+        filename: '[name].js',
+        publicPath: '/js/'
     },
     module: {
         loaders: [
@@ -37,17 +42,18 @@ export default {
                 use: ['html-loader']
             },
             {
+                test: /\.css$/,
+                use: extractCss.extract([
+                    'css-loader',
+                    'postcss-loader'
+                ])
+            },
+            {
                 test: /\.less$/,
-                use: [
-                  'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
-                  'less-loader'
-                ]
+                use: extractLess.extract([
+                    'css-loader',
+                    'less-loader'
+                ])
             }
         ]
     },
@@ -63,10 +69,11 @@ export default {
         new CleanWebpackPlugin(['dist'], {
             root: resolvePath('../')
         }),
+        extractCss,
+        extractLess,
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vector',
-            filename: 'vector-[hash:4].js'
-        }),
-        
+            filename: 'vector.js'
+        })
     ]
 };

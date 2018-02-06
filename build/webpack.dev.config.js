@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-01-25 18:14:12
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-05 17:47:47
+ * @Last Modified time: 2018-02-06 15:11:33
  */
 
 import webpack from 'webpack';
@@ -17,9 +17,6 @@ export default webpackMerge(
     {
         entry: entries,
         devtool: "cheap-module-source-map",
-        plugins: [
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoEmitOnErrorsPlugin()
-        ].concat(hwplugins)
+        plugins: [].concat(hwplugins)
     }
 );

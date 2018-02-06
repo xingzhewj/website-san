@@ -3,9 +3,7 @@
     "ignore": [
         ".git",
         ".svn",
-        "node_modules/**/node_modules",
-        "dist",
-        "client"
+        "node_modules/**/node_modules"
     ],
     "verbose": false,
     "execMap": {
@@ -13,7 +11,8 @@
     },
     "watch": [
         "server",
-        "build"
+        "build",
+        "client"
     ],
-    "ext": "js san json"
+    "ext": "js san json tpl.html"
 }
