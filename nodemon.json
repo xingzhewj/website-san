@@ -14,5 +14,5 @@
         "build",
         "client"
     ],
-    "ext": "js san json tpl.html"
+    "ext": "js san json tpl.html less"
 }

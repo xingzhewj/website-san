@@ -3,22 +3,23 @@
  * @Author wangjie19
  * @Date 2018-01-24 14:38:44
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-06 17:54:53
+ * @Last Modified time: 2018-02-07 12:16:51
  */
 import webpack from 'webpack';
 import path from 'path';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
 function resolvePath(file) {
     return path.resolve(__dirname, file);
 }
 
 const extractCss = new ExtractTextPlugin({
-    filename: '../css/[name].css'
+    filename: '../css/[name]-[contenthash:4].css'
 });
 const extractLess = new ExtractTextPlugin({
-    filename: '../css/[name].css'
+    filename: '../css/[name]-[contenthash:4].css'
 });
 
 export default {
@@ -44,8 +45,7 @@ export default {
             {
                 test: /\.css$/,
                 use: extractCss.extract([
-                    'css-loader',
-                    'postcss-loader'
+                    'css-loader'
                 ])
             },
             {
@@ -54,6 +54,17 @@ export default {
                     'css-loader',
                     'less-loader'
                 ])
+            },
+            {
+                test:/\.(png|jpg|gif|eot|svg|ttf|woff)$/,
+                use:[
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -71,6 +82,17 @@ export default {
         }),
         extractCss,
         extractLess,
+        new webpack.LoaderOptionsPlugin({  
+            options: {  
+                postcss: function(){  
+                    return [  
+                        require("autoprefixer")({  
+                            browsers: ['ie>=8','>1% in CN']  
+                        })  
+                    ]  
+                }  
+            }  
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vector',
             filename: 'vector.js'
