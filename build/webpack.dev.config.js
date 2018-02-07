@@ -2,8 +2,8 @@
  * @file 开发环境webpack配置
  * @Author wangjie19
  * @Date 2018-01-25 18:14:12
- * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-07 15:08:52
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-02-07 22:24:19
  */
 
 import webpack from 'webpack';
@@ -38,10 +38,10 @@ export default {
         publicPath: '/js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.san$/,
-                loader: 'san-loader'
+                use: ['san-loader']
             },
             {
                 test: /\.html?$/,
@@ -89,17 +89,6 @@ export default {
         }),
         extractCss,
         extractLess,
-        new webpack.LoaderOptionsPlugin({  
-            options: {  
-                postcss: function(){  
-                    return [  
-                        require("autoprefixer")({  
-                            browsers: ['ie>=8','>1% in CN']  
-                        })  
-                    ]  
-                }  
-            }  
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vector',
             filename: 'vector.js'
