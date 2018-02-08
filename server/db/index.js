@@ -3,7 +3,7 @@
  * @Author wangjie19
  * @Date 2018-02-07 15:13:35
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-07 18:05:06
+ * @Last Modified time: 2018-02-08 16:46:09
  */
 
 import mysql from 'promise-mysql';
