@@ -2,29 +2,30 @@
  * @file 开发环境webpack配置
  * @Author wangjie19
  * @Date 2018-01-25 18:14:12
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-02-07 22:24:19
+ * @Last Modified by: wangjie19
+ * @Last Modified time: 2018-02-08 16:42:46
  */
 
-import webpack from 'webpack';
 import path from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import entries from './entries';
 import hwplugins from './hwplugins';
 
-function resolvePath(file) {
-    return path.resolve(__dirname, file);
+function resolvePath(ph) {
+    return path.resolve(__dirname, ph);
 }
 
-const extractCss = new ExtractTextPlugin({
-    filename: '../css/[name]-[contenthash:4].css'
-});
 const extractLess = new ExtractTextPlugin({
     filename: '../css/[name]-[contenthash:4].css'
 });
+const extractCss = new ExtractTextPlugin({
+    filename: '../css/[name]-[contenthash:4].css'
+});
 
-export default {
+module.exports = {
     devtool: "cheap-module-source-map",
     entry: Object.assign(
         entries,
@@ -33,12 +34,22 @@ export default {
         }
     ),
     output: {
+        filename: '[name]-[hash:4].js',
         path: resolvePath('../dist/js'),
-        filename: '[name].js',
         publicPath: '/js'
     },
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
+                }
+            },
             {
                 test: /\.san$/,
                 use: ['san-loader']
@@ -51,27 +62,33 @@ export default {
             {
                 test: /\.css$/,
                 use: extractCss.extract([
-                    'css-loader'
+                    {
+                        loader: 'css-loader'
+                    }
                 ])
             },
             {
                 test: /\.less$/,
-                use: extractLess.extract([
-                    'css-loader',
-                    'less-loader'
-                ])
-            },
-            {
-                test:/\.(png|jpg|gif|eot|svg|ttf|woff)$/,
-                use:[
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            // 8M
-                            limit: 1024 * 8
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //如果需要，可以在 sass-loader 之前将 resolve-url-loader 链接进来
+                    use: [
+                        {
+                            loader: 'css-loader'
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                config: {
+                                    path: resolvePath('../postcss.config.js')
+                                }
+                            }
+                        },
+                        {
+                            loader: 'less-loader'
                         }
-                    }
-                ]
+                    ]
+                })
             }
         ]
     },

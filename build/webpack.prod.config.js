@@ -3,29 +3,30 @@
  * @Author wangjie19
  * @Date 2018-01-30 17:09:36
  * @Last Modified by: wangjie19
- * @Last Modified time: 2018-02-07 15:09:13
+ * @Last Modified time: 2018-02-08 16:43:00
  */
 
-import webpack from 'webpack';
 import path from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import entries from './entries';
 import hwplugins from './hwplugins';
 
-function resolvePath(file) {
-    return path.resolve(__dirname, file);
+function resolvePath(ph) {
+    return path.resolve(__dirname, ph);
 }
 
-const extractCss = new ExtractTextPlugin({
-    filename: '../css/[name]-[contenthash:4].css'
-});
 const extractLess = new ExtractTextPlugin({
     filename: '../css/[name]-[contenthash:4].css'
 });
+const extractCss = new ExtractTextPlugin({
+    filename: '../css/[name]-[contenthash:4].css'
+});
 
-export default {
+module.exports = {
     entry: Object.assign(
         entries,
         {
@@ -33,15 +34,25 @@ export default {
         }
     ),
     output: {
+        filename: '[name]-[hash:4].js',
         path: resolvePath('../dist/js'),
-        filename: '[name].js',
         publicPath: '/js'
     },
     module: {
-        loaders: [
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
+                }
+            },
             {
                 test: /\.san$/,
-                loader: 'san-loader'
+                use: ['san-loader']
             },
             {
                 test: /\.html?$/,
@@ -61,29 +72,29 @@ export default {
             },
             {
                 test: /\.less$/,
-                use: extractLess.extract([
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //如果需要，可以在 sass-loader 之前将 resolve-url-loader 链接进来
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                config: {
+                                    path: resolvePath('../postcss.config.js')
+                                }
+                            }
+                        },
+                        {
+                            loader: 'less-loader'
                         }
-                    },
-                    {
-                        loader: 'less-loader'
-                    }
-                ])
-            },
-            {
-                test:/\.(png|jpg|gif|eot|svg|ttf|woff)$/,
-                use:[
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            // 8M
-                            limit: 1024 * 8
-                        }
-                    }
-                ]
+                    ]
+                })
             }
         ]
     },
@@ -101,17 +112,6 @@ export default {
         }),
         extractCss,
         extractLess,
-        new webpack.LoaderOptionsPlugin({  
-            options: {  
-                postcss: function(){  
-                    return [  
-                        require("autoprefixer")({  
-                            browsers: ['ie>=8','>1% in CN']  
-                        })  
-                    ]  
-                }  
-            }  
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vector',
             filename: 'vector.js'

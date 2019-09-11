@@ -2,8 +2,8 @@
  * @file 生产环境服务器启动脚本
  * @Author wangjie19
  * @Date 2018-01-30 17:10:41
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-01-30 23:04:45
+ * @Last Modified by: wangjie19
+ * @Last Modified time: 2018-02-08 16:18:37
  */
 
 import path from 'path';
@@ -23,11 +23,3 @@ webpack(webpackConfig, (err, stats) => {
         chunkModules: false
     }));
 });
-
-// const app = express();
-
-// app.use(express.static(path.resolve(__dirname, '../dist')));
-
-// app.listen(8080, () => {
-//     console.log('server success:http://localhost:8080/');
-// });
